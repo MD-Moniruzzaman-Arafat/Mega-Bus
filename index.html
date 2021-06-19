@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Ticket</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!--Header and Menu Section-->
+    <header class="container">
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a class="active" href="#">Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!--Booking Section-->
+    <main class="main-content container" >
+
+        <div class="booking-content" >
+            <h1>Mega City Bus</h1>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+        </div>
+
+
+        <div class="booking-form" id="main">
+            <h3>Explore By Bus</h3>
+
+            <div class="inputs">
+                <div class="input-group">
+                    <label" for="">From</label>
+                    <input class="inp-style" type="text" name="" placeholder="Dhaka">
+                </div>
+                <div class="input-group">
+                    <label" for="">From</label>
+                    <input class="inp-style" type="text" name="" placeholder="Chittagone">
+                </div>
+            </div>
+
+            <div class="inputs">
+                <div class="input-group">
+                    <label" for="">Departure</label>
+                    <input class="inp-style" type="date" name="">
+                </div>
+                <div class="input-group">
+                    <label for="">Return</label>
+                    <input class="inp-style" type="date" name="">
+                </div>
+            </div>
+            <div class="inputs">
+                <div class="input-group f-class">
+                <div>
+                    <label for="">First Class ($ <span id="firstClass">0</span> )</label>
+                    <input id="firstClassValue" class="inp-style inp-width" type="number" name="" value="0">
+                </div>
+                <div class="plus-minus-btn">
+                    <p> <span onclick="tiket(true,'firstClass');" id="firstClassIncress">+</span> <span onclick="tiket(false,'firstClass');" id="firstClassDecress">-</span> </p>
+                </div>
+            </div>
+                <div class="input-group f-class">
+                    <div>
+                        <label for="">Economy ($ <span id="economy">0</span> )</label>
+                        <input id="economyValue" class="inp-style inp-width" type="number" name="" value="0">
+                    </div>
+                    <div class="plus-minus-btn">
+                        <p> <span onclick="tiket(true,'economy');" id="economyIncress">+</span> <span onclick="tiket(false,'economy');" id="economyDecress">-</span> </p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="calculations">
+                <div class="amount">
+                    <div class="left">
+                        <p>Subtotal</p>
+                    </div>
+                    <div class="right">
+                        <p>$ <span id="total">000</span></p>
+                    </div>
+                </div>
+
+                <div class="amount">
+                    <div class="left">
+                        <p>Charge 10% VAT</p>
+                    </div>
+                    <div class="right">
+                        <p>$ <span id="totalText">00</span></p>
+                    </div>
+                </div>
+                <hr>
+                <div class="amount">
+                    <div class="left">
+                        <h4>Total</h4>
+                    </div>
+                    <div class="right">
+                        <p>$ <span id="grandTotal">000</span></p>
+                    </div>
+                </div>
+            </div>
+            <button class="btn-style" id="booking">Book Now</button>
+        </div>
+        <div id="main2">
+            <h1 id="heading">booking info</h1>
+            <div class="calculations">
+                <div class="amount">
+                    <div class="left">
+                        <p>Subtotal</p>
+                    </div>
+                    <div class="right">
+                        <p>$ <span id="bookingTotal">000</span></p>
+                    </div>
+                </div>
+
+                <div class="amount">
+                    <div class="left">
+                        <p>Charge 10% VAT</p>
+                    </div>
+                    <div class="right">
+                        <p>$ <span id="bookingTotalText">00</span></p>
+                    </div>
+                </div>
+                <hr>
+                <div class="amount">
+                    <div class="left">
+                        <h4>Total</h4>
+                    </div>
+                    <div class="right">
+                        <p>$ <span id="bookingGrandTotal">000</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </main>
+    
+    <script>
+        function tiket(id,catagory){
+            const Input = document.getElementById(catagory +"Value");
+            const InputNumber = parseInt(Input.value);
+            let newInputNumber = InputNumber;
+            if(id == true){
+                newInputNumber = InputNumber + 1;
+            }
+            if(id == false && InputNumber > 0){
+                newInputNumber = InputNumber - 1;
+            }
+            Input.value = newInputNumber;
+
+            let newPriceNumber = newInputNumber;
+            if (catagory == "firstClass") {
+                newPriceNumber = newInputNumber * 150;
+            }
+            if (catagory == "economy") {
+                newPriceNumber = newInputNumber * 100;
+            }
+            document.getElementById(catagory).innerText = newPriceNumber;
+            totalTk();
+        }
+        function totalTiket(catagory){
+            const totalTiket = document.getElementById(catagory + "Value");
+            const totalTiketNumber = parseInt(totalTiket.value);
+            return totalTiketNumber;
+        }
+        function totalTk(){
+            const firstClass = totalTiket("firstClass");
+            const economy = totalTiket("economy");
+            const total = firstClass * 150 + economy * 100;
+            document.getElementById("total").innerText = total;
+            const totalText = total * 0.1;
+            document.getElementById("totalText").innerText = totalText;
+            const grandTotal = total + totalText;
+            document.getElementById("grandTotal").innerText = grandTotal;
+
+            document.getElementById("bookingTotal").innerText = total;
+            document.getElementById("bookingTotalText").innerText = totalText;
+            document.getElementById("bookingGrandTotal").innerText = grandTotal;
+        }
+        
+        
+
+
+
+        document.getElementById("booking").addEventListener("click",function(){
+            const mainSection = document.getElementById("main");
+            mainSection.style.display = "none";
+            const mainSection2 = document.getElementById("main2");
+            mainSection2.style.display = "block";
+            mainSection2.style.fontWeight = 700;
+            mainSection2.style.color = "black";
+            mainSection2.style.backgroundColor = "white";
+            mainSection2.style.padding = "30px";
+            const heading = document.getElementById("heading");
+            heading.style.textAlign = "center";
+            heading.style.backgroundColor = "red";
+            heading.style.marginBottom = "30px";
+        })
+    </script>
+
+    <!--Thank You-->
+</body>
+
+</html>
